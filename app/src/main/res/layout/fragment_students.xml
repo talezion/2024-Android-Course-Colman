@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Modules.Students.StudentsRcyclerViewActivity">
+    tools:context=".Modules.Students.StudentsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvStudentREcyclerList"
+        android:id="@+id/rvStudentsFragmentList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

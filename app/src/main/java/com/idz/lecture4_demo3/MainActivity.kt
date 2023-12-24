@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.fragment.app.Fragment
+import com.idz.lecture4_demo3.Modules.Students.StudentsFragment
 
 class MainActivity : AppCompatActivity() {
 
-    var fragmentOne: BlueFragment? = null
+    var fragmentOne: StudentsFragment? = null
     var fragmentTwo: BlueFragment? = null
-    var fragmentThree: BlueFragment? = null
+    var fragmentThree: StudentsFragment? = null
     var fragmentFour: BlueFragment? = null
 
     var buttonOne: Button? = null
@@ -18,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     var buttonThree: Button? = null
     var buttonFour: Button? = null
 
-    var inDisplayFragment: BlueFragment? = null
+    var inDisplayFragment: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +29,9 @@ class MainActivity : AppCompatActivity() {
         // 1. Create fragment instances
         // 2. Set buttons references
 
-        fragmentOne = BlueFragment.newInstance("One")
+        fragmentOne = StudentsFragment()
         fragmentTwo = BlueFragment.newInstance("Two")
-        fragmentThree = BlueFragment.newInstance("Three")
+        fragmentThree = StudentsFragment()
         fragmentFour = BlueFragment.newInstance("Four")
 
         buttonOne = findViewById(R.id.btnMainTabOne)
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun displayBlueFragment(fragment: BlueFragment) {
+    fun displayBlueFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.flMainFragment, fragment)
 
@@ -78,14 +80,4 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
         inDisplayFragment = fragment
     }
-
-//    fun removeBlueFragment() {
-//        blueFragment?.let {
-//            val transaction = supportFragmentManager.beginTransaction()
-//            transaction.remove(it)
-//            transaction.addToBackStack("TAG")
-//            transaction.commit()
-//        }
-//        blueFragment = null
-//    }
 }

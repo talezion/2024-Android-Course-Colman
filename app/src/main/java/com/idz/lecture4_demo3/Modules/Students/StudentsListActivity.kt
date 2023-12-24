@@ -1,4 +1,4 @@
-package com.idz.lecture4_demo3
+package com.idz.lecture4_demo3.Modules.Students
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +12,7 @@ import android.widget.ListView
 import android.widget.TextView
 import com.idz.lecture4_demo3.Model.Model
 import com.idz.lecture4_demo3.Model.Student
+import com.idz.lecture4_demo3.R
 
 class StudentsListActivity : AppCompatActivity() {
 

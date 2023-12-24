@@ -1,10 +1,11 @@
-package com.idz.lecture4_demo3
+package com.idz.lecture4_demo3.Modules.AddStudent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.idz.lecture4_demo3.R
 
 class AddStudentActivity : AppCompatActivity() {
 
