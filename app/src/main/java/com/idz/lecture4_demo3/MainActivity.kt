@@ -8,34 +8,84 @@ import android.widget.Button
 
 class MainActivity : AppCompatActivity() {
 
+    var fragmentOne: BlueFragment? = null
+    var fragmentTwo: BlueFragment? = null
+    var fragmentThree: BlueFragment? = null
+    var fragmentFour: BlueFragment? = null
+
+    var buttonOne: Button? = null
+    var buttonTwo: Button? = null
+    var buttonThree: Button? = null
+    var buttonFour: Button? = null
+
+    var inDisplayFragment: BlueFragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val addStudentButton = findViewById<Button>(R.id.btnMainAddStudent)
-        val addStudentButton: Button = findViewById(R.id.btnMainAddStudent)
+        // 1. Create fragment instances
+        // 2. Set buttons references
 
-        // Option 1
-//        class ButtonOnClickListener : View.OnClickListener {
-//            override fun onClick(v: View?) {
-//
-//                val intent = Intent(this@MainActivity, AddStudentActivity::class.java)
-//            }
-//
-//        }
+        fragmentOne = BlueFragment.newInstance("One")
+        fragmentTwo = BlueFragment.newInstance("Two")
+        fragmentThree = BlueFragment.newInstance("Three")
+        fragmentFour = BlueFragment.newInstance("Four")
 
-//        val listener = ButtonOnClickListener()
-//        addStudentButton.setOnClickListener(ButtonOnClickListener()) //(listener)
+        buttonOne = findViewById(R.id.btnMainTabOne)
+        buttonTwo = findViewById(R.id.btnMainTabTwo)
+        buttonThree = findViewById(R.id.btnMainTabThree)
+        buttonFour = findViewById(R.id.btnMainTabFour)
 
-//        addStudentButton.setOnClickListener {
-//
-//        }
+        buttonOne?.setOnClickListener {
+            fragmentOne?.let {
+                displayBlueFragment(it)
+            }
+        }
 
-        addStudentButton.setOnClickListener(::onAddStudentButtonClicked)
+        buttonTwo?.setOnClickListener {
+            fragmentTwo?.let {
+                displayBlueFragment(it)
+            }
+        }
+
+        buttonThree?.setOnClickListener {
+            fragmentThree?.let {
+                displayBlueFragment(it)
+            }
+        }
+
+        buttonFour?.setOnClickListener {
+            fragmentFour?.let {
+                displayBlueFragment(it)
+            }
+        }
+
+        fragmentOne?.let {
+            displayBlueFragment(it)
+        }
     }
 
-    fun onAddStudentButtonClicked(view: View) {
-        val intent = Intent(this, AddStudentActivity::class.java)
-        startActivity(intent)
+    fun displayBlueFragment(fragment: BlueFragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(R.id.flMainFragment, fragment)
+
+        inDisplayFragment?.let {
+            transaction.remove(it)
+        }
+
+        transaction.addToBackStack("TAG")
+        transaction.commit()
+        inDisplayFragment = fragment
     }
+
+//    fun removeBlueFragment() {
+//        blueFragment?.let {
+//            val transaction = supportFragmentManager.beginTransaction()
+//            transaction.remove(it)
+//            transaction.addToBackStack("TAG")
+//            transaction.commit()
+//        }
+//        blueFragment = null
+//    }
 }
