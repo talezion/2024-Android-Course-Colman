@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/studentsFragment"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="List" />
+    <item
+        android:id="@+id/addStudentFragment"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="Add" />
+    <item
+        android:icon="@android:drawable/ic_lock_lock"
+        android:title="About" />
+</menu>

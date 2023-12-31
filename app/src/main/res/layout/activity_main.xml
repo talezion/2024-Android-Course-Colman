@@ -4,59 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"><![CDATA[>
+    tools:context=".MainActivity">
 
-    ]]>
-
-    <FrameLayout
-        android:id="@+id/flMainFragment"
-        android:layout_width="0dp"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navHostMain"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnMainTabThree"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@+id/mainActivityBottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_graph" />
 
-    </FrameLayout>
-
-    <Button
-        android:id="@+id/btnMainTabOne"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/mainActivityBottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="One"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnMainTabTwo"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnMainTabTwo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Two"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnMainTabThree"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnMainTabOne" />
-
-    <Button
-        android:id="@+id/btnMainTabThree"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Three"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnMainTabFour"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnMainTabTwo" />
-
-    <Button
-        android:id="@+id/btnMainTabFour"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Four"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnMainTabThree" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>

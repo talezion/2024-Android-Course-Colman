@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.idz.lecture4_demo3.Model.Model
@@ -34,6 +36,11 @@ class StudentsFragment : Fragment() {
 
             override fun onItemClick(position: Int) {
                 Log.i("TAG", "StudentsRecyclerAdapter: Position clicked $position")
+                val student = students?.get(position)
+                student?.let {
+                    val action = StudentsFragmentDirections.actionStudentsFragmentToBlueFragment(it.name)
+                    Navigation.findNavController(view).navigate(action)
+                }
             }
 
             override fun onStudentClicked(student: Student?) {
@@ -42,6 +49,10 @@ class StudentsFragment : Fragment() {
         }
 
         studentsRcyclerView?.adapter = adapter
+
+        val addStudentButton: ImageButton = view.findViewById(R.id.ibtnStudentsFragmentAddStudent)
+        val action = Navigation.createNavigateOnClickListener(StudentsFragmentDirections.actionGlobalAddStudentFragment())
+        addStudentButton.setOnClickListener(action)
 
         return view
     }

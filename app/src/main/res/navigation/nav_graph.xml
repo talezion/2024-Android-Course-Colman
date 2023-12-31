@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/studentsFragment">
+
+    <fragment
+        android:id="@+id/studentsFragment"
+        android:name="com.idz.lecture4_demo3.Modules.Students.StudentsFragment"
+        android:label="Students List"
+        tools:layout="@layout/fragment_students">
+        <action
+            android:id="@+id/action_studentsFragment_to_blueFragment"
+            app:destination="@id/blueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/blueFragment"
+        android:name="com.idz.lecture4_demo3.BlueFragment"
+        android:label="Blue Fragment"
+        tools:layout="@layout/fragment_blue">
+        <argument
+            android:name="TITLE"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addStudentFragment"
+        android:name="com.idz.lecture4_demo3.Modules.AddStudent.AddStudentFragment"
+        android:label="Add Student"
+        tools:layout="@layout/fragment_add_student" />
+    <action android:id="@+id/action_global_addStudentFragment" app:destination="@id/addStudentFragment" />
+</navigation>
