@@ -15,6 +15,7 @@ import com.idz.lecture4_demo3.Model.Model
 import com.idz.lecture4_demo3.Model.Student
 import com.idz.lecture4_demo3.Modules.Students.Adapter.StudentsRecyclerAdapter
 import com.idz.lecture4_demo3.R
+import com.idz.lecture4_demo3.databinding.FragmentStudentsBinding
 
 class StudentsFragment : Fragment() {
 
@@ -23,13 +24,18 @@ class StudentsFragment : Fragment() {
     var adapter: StudentsRecyclerAdapter? = null
     var progressBar: ProgressBar? = null
 
+    private var _binding: FragmentStudentsBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_students, container, false)
-        progressBar = view.findViewById(R.id.progressBar)
+
+        _binding = FragmentStudentsBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        progressBar = binding.progressBar
 
         progressBar?.visibility = View.VISIBLE
 
@@ -41,7 +47,7 @@ class StudentsFragment : Fragment() {
             progressBar?.visibility = View.GONE
         }
 
-        studentsRcyclerView = view.findViewById(R.id.rvStudentsFragmentList)
+        studentsRcyclerView = binding.rvStudentsFragmentList
         studentsRcyclerView?.setHasFixedSize(true)
         studentsRcyclerView?.layoutManager = LinearLayoutManager(context)
         adapter = StudentsRecyclerAdapter(students)
@@ -82,5 +88,11 @@ class StudentsFragment : Fragment() {
 
             progressBar?.visibility = View.GONE
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        _binding = null
     }
 }

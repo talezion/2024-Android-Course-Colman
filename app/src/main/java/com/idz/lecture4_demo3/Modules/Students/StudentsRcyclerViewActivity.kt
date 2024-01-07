@@ -14,6 +14,7 @@ import com.idz.lecture4_demo3.Model.Model
 import com.idz.lecture4_demo3.Model.Student
 import com.idz.lecture4_demo3.Modules.Students.Adapter.StudentsRecyclerAdapter
 import com.idz.lecture4_demo3.R
+import com.idz.lecture4_demo3.databinding.ActivityStudentsRcyclerViewBinding
 
 class StudentsRcyclerViewActivity : AppCompatActivity() {
 
@@ -21,9 +22,13 @@ class StudentsRcyclerViewActivity : AppCompatActivity() {
     var students: List<Student>? = null
     var adapter: StudentsRecyclerAdapter? = null
 
+    private lateinit var binding: ActivityStudentsRcyclerViewBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_students_rcycler_view)
+
+        binding = ActivityStudentsRcyclerViewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         Model.instance.getAllStudents { students ->
             this.students = students
@@ -31,7 +36,7 @@ class StudentsRcyclerViewActivity : AppCompatActivity() {
             adapter?.notifyDataSetChanged()
         }
 
-        studentsRcyclerView = findViewById(R.id.rvStudentREcyclerList)
+        studentsRcyclerView = binding.rvStudentREcyclerList
         studentsRcyclerView?.setHasFixedSize(true)
         studentsRcyclerView?.layoutManager = LinearLayoutManager(this)
 
