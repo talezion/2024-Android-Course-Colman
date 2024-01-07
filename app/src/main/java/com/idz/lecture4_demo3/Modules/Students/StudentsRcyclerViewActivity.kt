@@ -18,18 +18,25 @@ import com.idz.lecture4_demo3.R
 class StudentsRcyclerViewActivity : AppCompatActivity() {
 
     var studentsRcyclerView: RecyclerView? = null
-    var students: MutableList<Student>? = null
+    var students: List<Student>? = null
+    var adapter: StudentsRecyclerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_students_rcycler_view)
 
-        students = Model.instance.students
+        Model.instance.getAllStudents { students ->
+            this.students = students
+            adapter?.students = students
+            adapter?.notifyDataSetChanged()
+        }
+
         studentsRcyclerView = findViewById(R.id.rvStudentREcyclerList)
         studentsRcyclerView?.setHasFixedSize(true)
         studentsRcyclerView?.layoutManager = LinearLayoutManager(this)
-        val adapter = StudentsRecyclerAdapter(students)
-        adapter.listener = object : OnItemClickListener {
+
+        adapter = StudentsRecyclerAdapter(students)
+        adapter?.listener = object : OnItemClickListener {
 
             override fun onItemClick(position: Int) {
                 Log.i("TAG", "StudentsRecyclerAdapter: Position clicked $position")
@@ -46,5 +53,15 @@ class StudentsRcyclerViewActivity : AppCompatActivity() {
     interface OnItemClickListener {
         fun onItemClick(position: Int) // Student
         fun onStudentClicked(student: Student?)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        Model.instance.getAllStudents { students ->
+            this.students = students
+            adapter?.students = students
+            adapter?.notifyDataSetChanged()
+        }
     }
 }

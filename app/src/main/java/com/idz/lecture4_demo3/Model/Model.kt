@@ -1,11 +1,44 @@
 package com.idz.lecture4_demo3.Model
 
+import android.os.Handler
+import android.os.Looper
+import androidx.core.os.HandlerCompat
+import com.idz.lecture4_demo3.dao.AppLocalDatabase
+import java.util.concurrent.Executors
+
 class Model private constructor() {
 
-    val students: MutableList<Student> = ArrayList()
+    private val database = AppLocalDatabase.db
+    private var executor = Executors.newSingleThreadExecutor()
+    private var mainHandler = HandlerCompat.createAsync(Looper.getMainLooper())
 
     companion object {
         val instance: Model = Model()
     }
 
+    interface GetAllStudentsListener {
+        fun onComplete(students: List<Student>)
+    }
+
+    fun getAllStudents(callback: (List<Student>) -> Unit) {
+        executor.execute {
+
+            Thread.sleep(5000)
+
+            val students = database.studentDao().getAll()
+            mainHandler.post {
+                // Main Thread
+                callback(students)
+            }
+        }
+    }
+
+    fun addStudent(student: Student, callback: () -> Unit) {
+        executor.execute {
+            database.studentDao().insert(student)
+            mainHandler.post {
+                callback()
+            }
+        }
+    }
 }

@@ -11,7 +11,7 @@ import com.idz.lecture4_demo3.R
 
 class StudentViewHolder(val itemView: View,
                         val listener: StudentsRcyclerViewActivity.OnItemClickListener?,
-                        var students: MutableList<Student>?): RecyclerView.ViewHolder(itemView) {
+                        var students: List<Student>?): RecyclerView.ViewHolder(itemView) {
 
     var nameTextView: TextView? = null
     var idTextView: TextView? = null

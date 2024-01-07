@@ -17,13 +17,15 @@ import com.idz.lecture4_demo3.R
 class StudentsListActivity : AppCompatActivity() {
 
     var studentsListView: ListView? = null
-    var students: MutableList<Student>? = null
+    var students: List<Student>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_students_list)
 
-        students = Model.instance.students
+        Model.instance.getAllStudents { students ->
+            this.students = students
+        }
 
         studentsListView = findViewById(R.id.lvStudentList)
         studentsListView?.adapter = StudentsListAdapter(students)
@@ -33,7 +35,7 @@ class StudentsListActivity : AppCompatActivity() {
         }
     }
 
-    class StudentsListAdapter(val students: MutableList<Student>?): BaseAdapter() {
+    class StudentsListAdapter(val students: List<Student>?): BaseAdapter() {
 
         override fun getCount(): Int = students?.size ?: 0
 

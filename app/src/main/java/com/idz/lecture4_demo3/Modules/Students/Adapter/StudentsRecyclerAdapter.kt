@@ -7,7 +7,7 @@ import com.idz.lecture4_demo3.Model.Student
 import com.idz.lecture4_demo3.Modules.Students.StudentsRcyclerViewActivity
 import com.idz.lecture4_demo3.R
 
-class StudentsRecyclerAdapter(var students: MutableList<Student>?): RecyclerView.Adapter<StudentViewHolder>() {
+class StudentsRecyclerAdapter(var students: List<Student>?): RecyclerView.Adapter<StudentViewHolder>() {
 
     var listener: StudentsRcyclerViewActivity.OnItemClickListener? = null
 

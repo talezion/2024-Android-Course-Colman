@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +19,9 @@ import com.idz.lecture4_demo3.R
 class StudentsFragment : Fragment() {
 
     var studentsRcyclerView: RecyclerView? = null
-    var students: MutableList<Student>? = null
+    var students: List<Student>? = null
+    var adapter: StudentsRecyclerAdapter? = null
+    var progressBar: ProgressBar? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,13 +29,23 @@ class StudentsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_students, container, false)
+        progressBar = view.findViewById(R.id.progressBar)
 
-        students = Model.instance.students
+        progressBar?.visibility = View.VISIBLE
+
+        Model.instance.getAllStudents { students ->
+            this.students = students
+            adapter?.students = students
+            adapter?.notifyDataSetChanged()
+
+            progressBar?.visibility = View.GONE
+        }
+
         studentsRcyclerView = view.findViewById(R.id.rvStudentsFragmentList)
         studentsRcyclerView?.setHasFixedSize(true)
         studentsRcyclerView?.layoutManager = LinearLayoutManager(context)
-        val adapter = StudentsRecyclerAdapter(students)
-        adapter.listener = object : StudentsRcyclerViewActivity.OnItemClickListener {
+        adapter = StudentsRecyclerAdapter(students)
+        adapter?.listener = object : StudentsRcyclerViewActivity.OnItemClickListener {
 
             override fun onItemClick(position: Int) {
                 Log.i("TAG", "StudentsRecyclerAdapter: Position clicked $position")
@@ -55,5 +68,19 @@ class StudentsFragment : Fragment() {
         addStudentButton.setOnClickListener(action)
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        progressBar?.visibility = View.VISIBLE
+
+        Model.instance.getAllStudents { students ->
+            this.students = students
+            adapter?.students = students
+            adapter?.notifyDataSetChanged()
+
+            progressBar?.visibility = View.GONE
+        }
     }
 }
