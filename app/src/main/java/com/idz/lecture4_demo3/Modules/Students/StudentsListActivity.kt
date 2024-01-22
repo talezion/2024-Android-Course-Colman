@@ -22,10 +22,10 @@ class StudentsListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_students_list)
-
-        Model.instance.getAllStudents { students ->
-            this.students = students
-        }
+//
+//        Model.instance.getAllStudents { students ->
+//            this.students = students
+//        }
 
         studentsListView = findViewById(R.id.lvStudentList)
         studentsListView?.adapter = StudentsListAdapter(students)

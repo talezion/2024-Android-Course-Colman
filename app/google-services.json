@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "91933336074",
+    "project_id": "colman-android-course-2024",
+    "storage_bucket": "colman-android-course-2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91933336074:android:f8a3aa807c0c40155735f3",
+        "android_client_info": {
+          "package_name": "com.idz.lecture4_demo3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHK87DetPkyrxWocmUyRTAQB8VqDIXVts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

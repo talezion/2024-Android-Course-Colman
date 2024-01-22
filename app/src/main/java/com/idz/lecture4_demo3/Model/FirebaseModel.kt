@@ -1,5 +1,6 @@
 package com.idz.lecture4_demo3.Model
 
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.firestoreSettings
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.memoryCacheSettings
@@ -17,14 +18,16 @@ class FirebaseModel {
     init {
         val settings = firestoreSettings {
             setLocalCacheSettings(memoryCacheSettings {  })
-//            setLocalCacheSettings(persistentCacheSettings {  })
         }
         db.firestoreSettings = settings
     }
 
 
-    fun getAllStudents(callback: (List<Student>) -> Unit) {
-        db.collection(STUDENTS_COLLECTION_PATH).get().addOnCompleteListener {
+    fun getAllStudents(since: Long, callback: (List<Student>) -> Unit) {
+
+        db.collection(STUDENTS_COLLECTION_PATH)
+            .whereGreaterThanOrEqualTo(Student.LAST_UPDATED, Timestamp(since, 0))
+            .get().addOnCompleteListener {
             when (it.isSuccessful) {
                 true -> {
                     val students: MutableList<Student> = mutableListOf()

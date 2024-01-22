@@ -30,12 +30,6 @@ class StudentsRcyclerViewActivity : AppCompatActivity() {
         binding = ActivityStudentsRcyclerViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Model.instance.getAllStudents { students ->
-            this.students = students
-            adapter?.students = students
-            adapter?.notifyDataSetChanged()
-        }
-
         studentsRcyclerView = binding.rvStudentREcyclerList
         studentsRcyclerView?.setHasFixedSize(true)
         studentsRcyclerView?.layoutManager = LinearLayoutManager(this)
@@ -63,10 +57,10 @@ class StudentsRcyclerViewActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        Model.instance.getAllStudents { students ->
-            this.students = students
-            adapter?.students = students
-            adapter?.notifyDataSetChanged()
-        }
+//        Model.instance.getAllStudents { students ->
+//            this.students = students
+//            adapter?.students = students
+//            adapter?.notifyDataSetChanged()
+//        }
     }
 }
